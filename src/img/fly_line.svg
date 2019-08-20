@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="110px" height="13px" viewBox="0 0 110 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="1024" transform="translate(-683.000000, -200.000000)" fill="#D2D5D6">
+            <g id="Ticket" transform="translate(355.000000, 161.000000)">
+                <g id="Group" transform="translate(328.000000, 38.666667)">
+                    <rect id="Rectangle-2" x="0" y="6.33333333" width="96" height="1"></rect>
+                    <path d="M110.333333,9.76666667 L110.333333,8.46666667 L104.859649,5.21666667 L104.859649,1.64166667 C104.859649,1.10216667 104.401228,0.666666667 103.833333,0.666666667 C103.265439,0.666666667 102.807018,1.10216667 102.807018,1.64166667 L102.807018,5.21666667 L97.3333333,8.46666667 L97.3333333,9.76666667 L102.807018,8.14166667 L102.807018,11.7166667 L101.438596,12.6916667 L101.438596,13.6666667 L103.833333,13.0166667 L106.22807,13.6666667 L106.22807,12.6916667 L104.859649,11.7166667 L104.859649,8.14166667 L110.333333,9.76666667 Z" id="Shape" fill-rule="nonzero" transform="translate(103.833333, 6.833333) rotate(-270.000000) translate(-103.833333, -6.833333) "></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

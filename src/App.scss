@@ -1,0 +1,154 @@
+@import '../src/scss/helpers';
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f3f7fa;
+  font-family: "Open Sans";
+}
+
+p {
+  margin: 0;
+  font-family: "Open Sans";
+}
+
+.homepage-header {
+  display: flex;
+  justify-content: center;
+  padding: 51px 0;
+}
+
+.main {
+  width: 818px;
+  margin: auto;
+  display: flex;
+
+  @include lg {
+    width: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-light {
+    font-size: 10px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.21;
+    letter-spacing: normal;
+    color: #8b9497;
+    font-weight: 600;
+  }
+
+  .text-dark {
+    font-size: 12px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #4a4a4a;
+    font-weight: 600;
+  }
+
+  .filter-block {
+    width: 232px;
+    height: 331px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(91, 137, 164, 0.25);
+    background-color: #ffffff;
+    margin-right: 20px;
+    padding: 15px;
+
+    @include lg {
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 12px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.58;
+      letter-spacing: 0.5px;
+      color: #4a4a4a;
+    }
+  }
+
+  .result-block {
+    width: 566px;
+    height: 161px;
+    border-radius: 5px;
+    box-shadow: 0 1px 4px 0 rgba(91, 137, 164, 0.25);
+    background-color: #ffffff;
+    display: flex;
+    margin-bottom: 20px;
+
+    .turkish-airlines {
+      width: 256px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid #eceff1;
+
+      .button-buy {
+        width: 160px;
+        height: 56px;
+        border-radius: 5px;
+        box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 0 #d64d08;
+        background-color: #ff6d00;
+        margin-top: 20px;
+        color: #ffffff;
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        outline: none;
+        cursor: pointer;
+      }
+    }
+
+    .turkish-airlines-info {
+      width: 365px;
+      padding: 26px 25px;
+      display: flex;
+      flex-direction: column;
+
+      .info-first {
+        display: flex;
+        justify-content: space-between;
+
+        .info-time {
+          font-size: 32px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 0.81;
+          letter-spacing: normal;
+          color: #4a4a4a;
+        }
+
+        .div-stops {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .info-stops {
+            display: flex;
+            p {
+              text-align: center;
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      .info-second {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Mixins media queries
+   ========================================================================== */
+
+// Small tablets and large smartphones (landscape view)
+@mixin sm {
+    @media (max-width: 576px) {
+      @content;
+    }
+  }
+  
+  // Small tablets (portrait view)
+  @mixin md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+  
+  // Tablets and small desktops
+  @mixin lg {
+    @media (max-width: 992px) {
+      @content;
+    }
+  }
+  
+  // Large tablets and desktops
+  @mixin xl {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+  
