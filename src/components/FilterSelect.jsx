@@ -40,7 +40,6 @@ export class FilterSelect extends React.Component {
             if(parameter === 'stops') {
               value = stoped[prop];
             } else { value = prop || 'Все' }
-
             return (
               <div key={`filter-value-${i}`} onClick={() => this.setValue(prop)} className={classNames('select__option')}>
                 {value}

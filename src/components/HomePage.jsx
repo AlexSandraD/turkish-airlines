@@ -10,34 +10,23 @@ import logo from "../img/logo.svg";
 import turkishAirlines from "../img/turkish_airlines.svg";
 import fly from "../img/fly_line.svg";
 
-const stoped = {
-  "0": "Без пересадок",
-  "1": "1 пересадка",
-  "2": "2 пересадки ",
-  "3": "3 пересадки "
-};
-
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       filter: {},
       currencies: [],
-      value: "?",
-      base: "?",
-      input: "?",
-      rate: 0
+      rate: 0,
+      selected: "RUB"
     };
-    this.getRates = this.getRates.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handlePrint = this.handlePrint.bind(this);
     this.onChangeFilter = this.onChangeFilter.bind(this);
   }
 
   componentDidMount() {
     this.props.fetchTickets();
 
-    fetch("https://api.exchangeratesapi.io/latest?symbols=USD")
+    fetch("https://api.exchangeratesapi.io/latest?base=RUB&symbols=USD,EUR")
       .then(data => data.json())
       .then(data => {
         const currencies = [];
@@ -47,51 +36,17 @@ class HomePage extends React.Component {
         );
 
         this.setState({
-          currencies
-        });
-        console.log(data);
-      })
-      .catch(err => console.log(err));
-
-    // fetch('https://api.exchangeratesapi.io/latest')
-    // .then(data => data.json())
-    // .then(data => {
-    //   const currencies = [];
-    //   currencies.push(data.base, ...Object.entries(data.rates).map(rates => rates[0]));
-    //   currencies.sort();
-    //   this.setState( { currencies } );
-    //   console.log(data);
-    // })
-    // .catch(err => console.log(err));
-  }
-
-  getRates() {
-    const base = this.handlePrint();
-    console.log(this.state);
-    fetch(`https://exchangeratesapi.io/api/latest?base=${base}`)
-      .then(data => data.json())
-      .then(data => {
-        this.setState({
+          currencies,
           rate: data.rates
         });
-        console.log(data.rates);
       })
       .catch(err => console.log(err));
   }
 
-  DropDown = function(list) {
-    return <option value={list}>{list}</option>;
-  };
-
-  handleChange(e) {
-    this.setState({ value: e.target.value });
-  }
-
-  handlePrint() {
-    console.log(this.state);
-    if (this.state.value) {
-      return this.state.value;
-    }
+  handleChange(event) {
+    this.setState({
+      selected: event.target.value
+    });
   }
 
   onChangeFilter(parameter, value) {
@@ -105,7 +60,7 @@ class HomePage extends React.Component {
 
   render() {
     const { tickets } = this.props;
-    const { filter, currencies } = this.state;
+    const { filter, rate, selected } = this.state;
 
     const filteredArray = tickets.filter(({ stops }) => {
       if (filter.stops) {
@@ -113,8 +68,6 @@ class HomePage extends React.Component {
       }
       return tickets;
     });
-
-    // console.log(filter.stops);
 
     return (
       <div className="homepage">
@@ -124,31 +77,54 @@ class HomePage extends React.Component {
 
         <section className="main">
           <div className="filter-block">
-            <p>ВАЛЮТА</p>
+            <div className="filter-block-info">
+              <p>ВАЛЮТА</p>
 
+              <div className="radio-group">
+                <input
+                  type="radio"
+                  value="RUB"
+                  id="rub"
+                  checked={selected === "RUB"}
+                  onChange={this.handleChange}
+                  className="stv-radio-button"
+                />
+                <label htmlFor="rub">RUB</label>
 
-            <div>
-              <span>SELECT your Base: </span>
-              <select autoFocus onChange={this.handleChange}>
-                <option inputcurrency={currencies} selected data-default>
-                  SELECT BASE
-                </option>
-                {currencies.map(this.DropDown)}
-              </select>
-              <button onClick={this.getRates}>GET RAtes</button>
-              <p>selected base:{this.handlePrint()} </p>
+                <input
+                  type="radio"
+                  value="USD"
+                  id="usd"
+                  checked={selected === "USD"}
+                  onChange={this.handleChange}
+                  className="stv-radio-button"
+                />
+                <label htmlFor="usd">USD</label>
+
+                <input
+                  type="radio"
+                  value="EUR"
+                  id="eur"
+                  checked={selected === "EUR"}
+                  onChange={this.handleChange}
+                  className="stv-radio-button"
+                />
+                <label htmlFor="eur">EUR</label>
+              </div>
+
+              <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
+              <FilterSelect
+                options={[
+                  { stops: 0 },
+                  { stops: 1 },
+                  { stops: 2 },
+                  { stops: 3 }
+                ]}
+                parameter="stops"
+                value={filter.stops}
+                onChange={this.onChangeFilter}
+              />
             </div>
-
-
-
-            <p>КОЛИЧЕСТВО ПЕРЕСАДОК</p>
-            <FilterSelect
-              options={[{ stops: 0 }, { stops: 1 }, { stops: 2 }, { stops: 3 }]}
-              // label="Статус"
-              parameter="stops"
-              value={filter.stops}
-              onChange={this.onChangeFilter}
-            />
           </div>
 
           <div>
@@ -164,8 +140,8 @@ class HomePage extends React.Component {
                 arrival_date,
                 stops,
                 price
-              }) => (
-                <div className="result-block">
+              }, i ) => (
+                <div key={i} className="result-block">
                   <div className="turkish-airlines">
                     <img
                       src={turkishAirlines}
@@ -173,7 +149,12 @@ class HomePage extends React.Component {
                       className="turkish-airlines-img"
                     />
                     <button className="button-buy">
-                      Купить <br /> за {price}
+                      Купить <br /> за{" "}
+                      {selected === "RUB"
+                        ? price + " ₽"
+                        : selected === "EUR"
+                        ? Math.ceil(price * rate.EUR) + " €"
+                        : Math.ceil(price * rate.USD) + " $"}
                     </button>
                   </div>
                   <div className="turkish-airlines-info">

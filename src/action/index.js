@@ -25,7 +25,6 @@ export function fetchTickets() {
       .then(res => res.json())
       .then(json => {
         dispatch(fetchTicketsSuccess(json.tickets));
-        console.log(json.tickets);
         return json.tickets;
       })
       .catch(error => dispatch(fetchTicketsError(error)));
