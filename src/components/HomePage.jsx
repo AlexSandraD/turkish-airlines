@@ -17,10 +17,15 @@ class HomePage extends React.Component {
       filter: {},
       currencies: [],
       rate: 0,
-      selected: "RUB"
+      selected: "RUB",
+      gender: {
+        girl: false,
+        boy: false
+      }
     };
     this.handleChange = this.handleChange.bind(this);
     this.onChangeFilter = this.onChangeFilter.bind(this);
+    this.allFilterClickListener = this.allFilterClickListener.bind(this);
   }
 
   componentDidMount() {
@@ -58,16 +63,61 @@ class HomePage extends React.Component {
     });
   }
 
+  allFilterClickListener = (e, filterProp) => {
+    console.log("FILTER clicked", e.target.dataset.name);
+    const name = e.target.dataset.name;
+    this.setState(prevState => ({
+      passingTags: {
+        ...prevState.passingTags,
+        [filterProp]: {
+          ...prevState.passingTags[filterProp],
+          [name]: !prevState.passingTags[filterProp][name]
+        }
+      }
+    }));
+  };
+  filteredCollected = () => {
+    const collectedTrueKeys = {
+      gender: []
+    };
+    const { gender } = this.state.passingTags;
+    for (let genderKey in gender) {
+      if (gender[genderKey]) collectedTrueKeys.gender.push(genderKey);
+    }
+    return collectedTrueKeys;
+  };
+
+  multiPropsFilter = (products, filters) => {
+    const filterKeys = Object.keys(filters);
+    return products.filter(product => {
+      return filterKeys.every(key => {
+        if (!filters[key].length) return true;
+        // Loops again if product[key] is an array (for material attribute).
+        if (Array.isArray(product[key])) {
+          return product[key].some(keyEle => filters[key].includes(keyEle));
+        }
+        return filters[key].includes(product[key]);
+      });
+    });
+  };
+
   render() {
     const { tickets } = this.props;
     const { filter, rate, selected } = this.state;
 
     const filteredArray = tickets.filter(({ stops }) => {
       if (filter.stops) {
-        return !filter.stops || stops === filter.stops;
+        // console.log('filter', filter)
+        console.log('filter.stops', filter.stops1)
+        // console.log('stops', stops)
+        return (
+          (!filter.stops || stops === filter.stops)
+          )
       }
       return tickets;
     });
+
+
 
     return (
       <div className="homepage">
@@ -124,23 +174,50 @@ class HomePage extends React.Component {
                 value={filter.stops}
                 onChange={this.onChangeFilter}
               />
+              {/* <FilterSelect
+                options={tickets.filter(({ stops }) => stops === 1)}
+                parameter="stops"
+                value={filter.stops}
+                onChange={this.onChangeFilter}
+              />
+              <FilterSelect
+                options={tickets.filter(({ stops }) => stops === 2)}
+                parameter="stops"
+                value={filter.stops1}
+                onChange={this.onChangeFilter}
+              />
+              <FilterSelect
+                options={tickets.filter(({ stops }) => stops === 3)}
+                parameter="stops"
+                value={filter.stops}
+                onChange={this.onChangeFilter}
+              />
+              <FilterSelect
+                options={tickets.filter(({ stops }) => stops === 0)}
+                parameter="stops"
+                value={filter.stops}
+                onChange={this.onChangeFilter}
+              /> */}
             </div>
           </div>
 
           <div>
             {filteredArray.map(
-              ({
-                origin,
-                origin_name,
-                destination,
-                destination_name,
-                departure_time,
-                arrival_time,
-                departure_date,
-                arrival_date,
-                stops,
-                price
-              }, i ) => (
+              (
+                {
+                  origin,
+                  origin_name,
+                  destination,
+                  destination_name,
+                  departure_time,
+                  arrival_time,
+                  departure_date,
+                  arrival_date,
+                  stops,
+                  price
+                },
+                i
+              ) => (
                 <div key={i} className="result-block">
                   <div className="turkish-airlines">
                     <img

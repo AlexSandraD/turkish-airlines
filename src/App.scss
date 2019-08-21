@@ -64,6 +64,12 @@ p {
     @include lg {
       margin-right: 0px;
       margin-bottom: 20px;
+      width: 566px;
+      height: auto;
+    }
+
+    @include sm {
+      width: 80vw;
     }
 
     p {
@@ -129,6 +135,12 @@ p {
     display: flex;
     margin-bottom: 20px;
 
+    @include sm {
+      height: auto;
+      width: 80vw;
+      flex-direction: column-reverse;
+    }
+
     .turkish-airlines {
       width: 256px;
       display: flex;
@@ -136,6 +148,12 @@ p {
       justify-content: center;
       align-items: center;
       border-right: 1px solid #eceff1;
+
+      @include sm {
+        border-right: none;
+        padding: 20px;
+        width: auto;
+      }
 
       .button-buy {
         width: 160px;
@@ -159,6 +177,10 @@ p {
       display: flex;
       flex-direction: column;
 
+      @include sm {
+        width: auto;
+      }
+
       .info-first {
         display: flex;
         justify-content: space-between;
@@ -179,6 +201,12 @@ p {
           align-items: center;
           justify-content: center;
 
+          @include sm {
+            width: 8%;
+            position: relative;
+            top: 75px;
+          }
+
           .info-stops {
             display: flex;
             p {
@@ -186,6 +214,12 @@ p {
               margin-right: 5px;
             }
           }
+          // img {
+          //   @include sm {
+          //     width: 50px;
+          //     padding: 5px 10px;
+          //   }
+          // }
         }
       }
 
