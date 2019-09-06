@@ -97,7 +97,6 @@ export class HomePage extends React.Component {
     const { rate, selected, selectedStops } = this.state;
 
     const newSelected = [...selectedStops];
-    console.log(newSelected);
 
     const filteredArray = (tickets, filter) => {
       if (selectedStops.size === 0) {
