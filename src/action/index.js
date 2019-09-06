@@ -2,22 +2,6 @@ export const FETCH_TICKETS_BEGIN = "FETCH_TICKETS_BEGIN";
 export const FETCH_TICKETS_SUCCESS = "FETCH_TICKETS_SUCCESS";
 export const FETCH_TICKETS_ERROR = "FETCH_TICKETS_ERROR";
 
-// export const ADD_FILTER = "ADD_FILTER";
-// export const REMOVE_FILTER = "REMOVE_FILTER";
-
-// export const addFilter = filterType => {
-//   return {
-//     type: ADD_FILTER,
-//     filterType
-//   };
-// };
-
-// export const removeFilter = filterType => {
-//   return {
-//     type: REMOVE_FILTER,
-//     filterType
-//   };
-// };
 
 export const fetchTicketsBegin = () => ({
   type: FETCH_TICKETS_BEGIN

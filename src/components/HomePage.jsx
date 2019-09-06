@@ -7,7 +7,6 @@ import logo from "../img/logo.svg";
 import turkishAirlines from "../img/turkish_airlines.svg";
 import fly from "../img/fly_line.svg";
 
-
 export class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +15,8 @@ export class HomePage extends React.Component {
       rate: 0,
       selected: "RUB",
       selectedStops: new Set(),
-      checked: false
+      checked: false,
+      isAllchecked: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelectedStops = this.handleSelectedStops.bind(this);
@@ -52,16 +52,23 @@ export class HomePage extends React.Component {
     let selectedStops = this.state.selectedStops;
     if (checked) {
       selectedStops.add(selecteStop);
+      this.setState({
+        isAllchecked: false
+      });
     } else {
       selectedStops.delete(selecteStop);
     }
     this.setState({ selectedStops });
   }
 
-  removeSelected() {
+  removeSelected(event) {
     let selectedStops = this.state.selectedStops;
     selectedStops.clear();
-    this.setState({ checked: false, selectedStops });
+    this.setState({
+      isAllchecked: event.target.checked,
+      checked: false,
+      selectedStops
+    });
   }
 
   renderList() {
@@ -116,7 +123,6 @@ export class HomePage extends React.Component {
 
     return (
       <div className="homepage">
-        {/* <Test /> */}
         <header className="homepage-header">
           <img src={logo} alt="logo" />
         </header>
@@ -164,6 +170,7 @@ export class HomePage extends React.Component {
                 <li>
                   <input
                     onChange={this.removeSelected.bind(this)}
+                    checked={this.state.isAllchecked}
                     type="checkbox"
                     value="all"
                     name="checkAll"
@@ -254,13 +261,13 @@ export class HomePage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  tickets: state.tickets.tickets,
+  tickets: state.tickets.tickets
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      fetchTickets,
+      fetchTickets
     },
     dispatch
   );
