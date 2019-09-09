@@ -133,11 +133,52 @@ p {
       margin: 16px 0 0 0;
       padding: 0;
 
+      // .styled-checkbox {
+      //   position: absolute; // take it out of document flow
+      //   opacity: 0; // hide it
+
+      //   & + label {
+      //     position: relative;
+      //     cursor: pointer;
+      //     padding: 0;
+      //   }
+      //   &:checked + label:before {
+      //     background: #f1fcff;
+      //     border-radius: 25%;
+      //   }
+
+      //   &:checked + label:after {
+      //     content: "";
+      //     position: absolute;
+      //     left: 5px;
+      //     top: 9px;
+      //     background: #2196f3;
+      //     width: 2px;
+      //     height: 2px;
+      //     box-shadow: 2px 0 0 #2196f3, 4px 0 0 #2196f3, 4px -2px 0 #2196f3,
+      //       4px -4px 0 #2196f3, 4px -6px 0 #2196f3, 4px -8px 0 #2196f3;
+      //     transform: rotate(45deg);
+      //   }
+      // }
+
+      #wrapper .text {
+        visibility:hidden;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        color: #2196f3;
+        }
+        
+        #wrapper:hover .text {
+        visibility:visible;
+        }
+
       li {
         padding: 3.5px 0;
         display: flex;
         align-items: center;
-
+        justify-content: space-between;
 
         &:hover {
           background-color: #f1fcff;
@@ -158,7 +199,6 @@ p {
           cursor: pointer;
         }
       }
-
     }
   }
 
