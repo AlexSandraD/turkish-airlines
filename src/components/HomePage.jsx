@@ -174,6 +174,7 @@ export class HomePage extends React.Component {
                 <li id="wrapper">
                   <div>
                     <input
+                      className="styled-checkbox"
                       onChange={this.removeSelected.bind(this)}
                       checked={this.state.isAllchecked}
                       type="checkbox"
