@@ -79,24 +79,23 @@ export class HomePage extends React.Component {
     return uniqueArray.map(prop => {
       return (
         <li key={prop} id="wrapper">
-          <div>
-            <input
-              className="styled-checkbox"
-              type="checkbox"
-              name={prop}
-              checked={this.state.checked || this.state.selectedStops.has(prop)}
-              onChange={event => {
-                this.handleSelectedStops(prop, event.target.checked);
-              }}
-            />
-            {prop === 0 ? (
-              <label> Без пересадки</label>
-            ) : prop === 1 ? (
-              <label> {prop} пересадка</label>
-            ) : (
-              <label> {prop} пересадки</label>
-            )}
-          </div>
+          <input
+            className="styled-checkbox"
+            type="checkbox"
+            name={prop}
+            value={prop}
+            checked={this.state.checked || this.state.selectedStops.has(prop)}
+            onChange={event => {
+              this.handleSelectedStops(prop, event.target.checked);
+            }}
+          />
+          {prop === 0 ? (
+            <label> Без пересадки</label>
+          ) : prop === 1 ? (
+            <label> {prop} пересадка</label>
+          ) : (
+            <label> {prop} пересадки</label>
+          )}
           <p className="text">Только</p>
         </li>
       );
@@ -172,17 +171,15 @@ export class HomePage extends React.Component {
 
               <ul className="filter-select">
                 <li id="wrapper">
-                  <div>
-                    <input
-                      className="styled-checkbox"
-                      onChange={this.removeSelected.bind(this)}
-                      checked={this.state.isAllchecked}
-                      type="checkbox"
-                      value="all"
-                      name="checkAll"
-                    />
-                    <label htmlFor="stop">Все</label>
-                  </div>
+                  <input
+                    className="styled-checkbox"
+                    onChange={this.removeSelected.bind(this)}
+                    checked={this.state.isAllchecked}
+                    type="checkbox"
+                    value="all"
+                    name="checkAll"
+                  />
+                  <label>Все</label>
                   <p className="text">Только</p>
                 </li>
 
